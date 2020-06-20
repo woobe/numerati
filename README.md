@@ -23,6 +23,8 @@ Add `.Rprofile` to your project folder with the following two lines (so you don'
 - https://rstudio.github.io/crosstalk/using.html
 - https://bwlewis.github.io/crosstool/
 - https://holtzy.github.io/Pimp-my-rmd/
+- https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/
+- https://rstudio.github.io/DT/
 
 
 ## To-do List
