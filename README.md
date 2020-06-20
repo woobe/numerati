@@ -2,12 +2,13 @@
 
 (Yet Another) Dashboard for Numerai Tournament
 
+
 ## Key Files
 
 - `download_data.R`: download latest data from Numerai
 - `./data/round_corr_latest.fst`: latest data in .fst format (not uploaded to github)
 - `index.Rmd`: RMarkdown for generating final HTML output
-- `index.html`: final HTML output
+- `index.html`: final HTML output <a href="https://woobe.github.io/numerati" target="_blank">woobe.github.io/numerati</a>
 
 
 ## Numerai ID and API Key (Optional)
