@@ -211,17 +211,17 @@ This dashboard is brought to you by
 
 **The <a href="https://numer.ai/ia_ai" target="_blank">IA_AI</a> Crew**
 
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/profile_ia_ai_001-VxZEDiBMdXRD.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/woobe-nGOLDxBXM2jY.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/low_cor_pred-FiIsz4hapX3V.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/profile_unburnt_001-eTiONVzqR369.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/profile_divergent_001-JvNthGCCVdkp.jpg" width="7%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/profile_ia_ai_001-VxZEDiBMdXRD.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/woobe-nGOLDxBXM2jY.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/low_cor_pred-FiIsz4hapX3V.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/profile_unburnt_001-eTiONVzqR369.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/profile_divergent_001-JvNthGCCVdkp.jpg" width="10%">
 
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_sweetspot-N7Tz9g9bZuWk.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_razor-mzfT5RzXYqNI.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_half_and_half-bwjHU7Wylhrw.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_unexposed-nI7xMcXQQYS8.jpg" width="7%">
-<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_parachute-P19Ywmz6M4Ts.jpg" width="7%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_sweetspot-N7Tz9g9bZuWk.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_razor-mzfT5RzXYqNI.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_half_and_half-bwjHU7Wylhrw.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_unexposed-nI7xMcXQQYS8.jpg" width="10%">
+<img src="https://numerai-public-images.s3.amazonaws.com/profile_images/the_parachute-P19Ywmz6M4Ts.jpg" width="10%">
 
 *"The NMR Life Chose Me."*
 
@@ -234,8 +234,8 @@ This dashboard is brought to you by
 <h6>
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
-Last updated on `r Sys.Date()`.<br>
-Prototype version **0.3**.<br>
+Last updated: `r Sys.time()`<br>
+Prototype version: 0.3<br>
 <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 
