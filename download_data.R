@@ -6,6 +6,10 @@
 library(Rnumerai)
 pacman::p_load(data.table, tictoc, fst, stringr, anytime)
 
+# Parameters
+verbose <- TRUE
+n_verbose <- 200
+
 
 # ==============================================================================
 # Download and Reformat Leaderboard
@@ -46,14 +50,14 @@ download_round_corr <- function(username) {
 }
 
 
+
 # ==============================================================================
-# Download Data
+# Check if we already have the latest data
 # ==============================================================================
 
 # clean up first
 if (exists("d_round_corr")) rm(d_round_corr)
 
-# Check if we already have the latest data
 chk_latest <- file.exists("./data/round_corr_latest.fst")
 
 if (!chk_latest) {
@@ -81,24 +85,30 @@ if (!chk_latest) {
 }
 
 
+# ==============================================================================
 # After first check, proceed to download / reload
+# ==============================================================================
+
 if (chk_download) {
+  
+  # Timer
+  t_start <- proc.time()
 
   # Make a copy first
   chk_backup <- file.exists("./data/round_corr_backup.fst")
   if (chk_backup) file.remove("./data/round_corr_backup.fst")
   if (chk_latest) file.copy(from = "./data/round_corr_latest.fst", to = "./data/round_corr_backup.fst")
   if (chk_latest) file.remove("./data/round_corr_latest.fst")
+  
+  # Display
+  cat("\n[Info]: Downloading latest data ...\n")
 
   # Loop through all users
   for (n_user in 1:length(d_lb$Username)) {
 
-    # Timer
-    tic()
-
     # Display info
     username <- d_lb$Username[n_user]
-    cat("[Info]: Downloading Round Correlation Data for User", n_user, "/", nrow(d_lb), "[", username, "] ... ")
+    if (verbose & n_user %% n_verbose == 0) cat("[Info]: Downloading Round Correlation Data for User", n_user, "/", nrow(d_lb), "[", username, "] ... ")
 
     # Download data
     if (exists("tmp_d_round_corr")) rm(tmp_d_round_corr)
@@ -120,7 +130,7 @@ if (chk_download) {
     }
 
     # Timer
-    toc()
+    if (verbose & n_user %% n_verbose == 0) print(timetaken(t_start))
 
   }
 
@@ -139,7 +149,7 @@ if (chk_download) {
 
 } else {
 
-  cat("[Info]: You already have the latest data. No need to download :)\n")
+  cat("\n[Info]: You already have the latest data. No need to download :)\n")
 
   # Load data
   d_round_corr <- read_fst("./data/round_corr_latest.fst")
