@@ -187,10 +187,13 @@ ggplotly(g_benchmark) %>% config(displayModeBar = FALSE)
 <center>
 <h4>
 Resolved / Latest Round Correlation
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
 </h4>
 ```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
 # Comparison Plot
 ggplotly(g_comparison) %>% config(displayModeBar = FALSE)
+# ggplotly(g_comparison) %>% config(modeBarButtons = list(list("zoomIn2d")))
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=60}
@@ -235,7 +238,7 @@ This dashboard is brought to you by
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: 0.3<br>
+Prototype version: 0.4<br>
 <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 
