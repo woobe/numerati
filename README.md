@@ -39,4 +39,5 @@ Add `.Rprofile` to your project folder with the following two lines (so you don'
 - **v0.2**: Added `Arbitrage Special` tab.
 - **v0.3**: Added `Benchmark` and `Comparison`. Removed `Prototype` and `Arbitrage Special`.
 - **v0.4**: Added Zoom In/Out tips in chart title.
+- **v0.5**: Added `The IA_AI Crew` tab. Renamed `Comparison` to `Compare Your Models`.
 
