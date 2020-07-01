@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 # Preload All Libararies
 library(Rnumerai)
@@ -272,11 +272,11 @@ This dashboard is brought to you by
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: 0.5<br>
+Prototype version: 0.6<br>
 <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 
-<br>
+<a href="https://github.com/woobe" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a>   <a href="https://twitter.com/matlabulous" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>   <a href="https://www.linkedin.com/in/jofaichow/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 
 </center>
 
