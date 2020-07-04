@@ -1,9 +1,11 @@
 ---
-pagetitle: "Numerati"
+pagetitle: "Numerati Dashboard"
 output: 
   html_document: 
     highlight: zenburn  
     theme: darkly
+    includes:
+       in_header: ga_header.html
 ---
 
 <br>
