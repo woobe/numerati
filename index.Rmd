@@ -33,13 +33,29 @@ d_round_corr[, last_date := max(Date), by = Round_Number]
 d_latest <- copy(d_round_corr[Date == last_date])
 
 
+# CORR + MMC (for New Leaderboard)
+d_latest[, CorrMMC := Round_Correlation + MMC]
+
+
 # Round Summary
 d_smry <- d_latest %>% lazy_dt() %>% group_by(Round_Number) %>%
   summarise(min_cor = round(min(Round_Correlation),5),
             p25_cor = round(quantile(Round_Correlation, probs = 0.25),5),
             avg_cor = round(mean(Round_Correlation),5),
             p75_cor = round(quantile(Round_Correlation, probs = 0.75),5),
-            max_cor = round(max(Round_Correlation),5)
+            max_cor = round(max(Round_Correlation),5),
+            
+            min_mmc = round(min(MMC, na.rm = TRUE),5),
+            p25_mmc = round(quantile(MMC, probs = 0.25, na.rm = TRUE),5),
+            avg_mmc = round(mean(MMC, na.rm = TRUE),5),
+            p75_mmc = round(quantile(MMC, probs = 0.75, na.rm = TRUE),5),
+            max_mmc = round(max(MMC, na.rm = TRUE),5),
+            
+            min_cm = round(min(CorrMMC, na.rm = TRUE),5),
+            p25_cm = round(quantile(CorrMMC, probs = 0.25, na.rm = TRUE),5),
+            avg_cm = round(mean(CorrMMC, na.rm = TRUE),5),
+            p75_cm = round(quantile(CorrMMC, probs = 0.75, na.rm = TRUE),5),
+            max_cm = round(max(CorrMMC, na.rm = TRUE),5)
                             ) %>% as.data.table()
 d_smry[, Username := "round_summary"]
 
@@ -135,10 +151,10 @@ if (TRUE) {
 models_all <- c("ia_ai", "the_razor", "woobe", "the_sweetspot", "the_half_and_half",
                "the_divergent", "the_unexposed", "the_parachute", "low_cor_pred", "the_unburnt")
 
-g_all <-
+# My Models (CORR)
+g_all_cor <-
   ggplot(d_new[Username %in% models_all]) +
   dark_mode(theme_fivethirtyeight()) +
-  # scale_color_manual(values = random_palette) +
   scale_color_brewer(type='qual', palette	='Paired') + 
   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
   theme(panel.background = element_rect(fill = "#222222")) +
@@ -158,6 +174,57 @@ g_all <-
   geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
   geom_path(data = d_new[Username == "integration_test"], 
             aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
+
+# My Models (MMC)
+g_all_mmc <-
+  ggplot(d_new[Username %in% models_all]) +
+  dark_mode(theme_fivethirtyeight()) +
+  scale_color_brewer(type='qual', palette	='Paired') + 
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_mmc, ymin = min_mmc, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_mmc, ymin = p25_mmc, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("MMC") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+  geom_point(aes(x = Round_Number, y = MMC, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = MMC, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = MMC, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
+
+
+# My Models (CORR + MMC)
+g_all_cm <-
+  ggplot(d_new[Username %in% models_all]) +
+  dark_mode(theme_fivethirtyeight()) +
+  scale_color_brewer(type='qual', palette	='Paired') + 
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cm, ymin = min_cm, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cm, ymin = p25_cm, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("CORR + MMC") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+  geom_point(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
             linetype = "dotted", size = 0.25, alpha = 0.5)
 
 
@@ -188,15 +255,11 @@ g_comparison <-
 
 
 
-
-
 #  {.tabset}
 
 
 
-
-
-## My Models
+## My Models (CORR)
 
 <br>
 <center>
@@ -209,15 +272,54 @@ Resolved / Latest Round Correlation
 </h4>
 
 ```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-# Benchmark Plot
-ggplotly(g_all) %>% config(displayModeBar = FALSE)
+ggplotly(g_all_cor) %>% config(displayModeBar = FALSE)
 ```
 
 </center>
 
 
 
-## Compare Your Models
+## My Models (MMC)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_all_mmc) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+
+
+## My Models (CORR + MMC)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+
+
+## Compare All Models (CORR)
 
 <br>
 <center>
@@ -227,7 +329,6 @@ Resolved / Latest Round Correlation
 (Highlight Area to Zoom In / Double-Click to Zoom Out)
 </h4>
 ```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-# Comparison Plot
 ggplotly(g_comparison) %>% config(displayModeBar = FALSE)
 # ggplotly(g_comparison) %>% config(modeBarButtons = list(list("zoomIn2d")))
 ```
@@ -274,7 +375,7 @@ This dashboard is brought to you by
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: 0.6<br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.7</a><br>
 <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 

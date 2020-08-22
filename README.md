@@ -30,7 +30,8 @@ Add `.Rprofile` to your project folder with the following two lines (so you don'
 
 ## To-do List
 
-- Fix the "selected" bug with plotly (see https://github.com/rstudio/crosstalk/issues/16) so only a few models (instead of 1400+) are shown in the `Comparison` tab
+- Fix the "selected" bug with plotly (see https://github.com/rstudio/crosstalk/issues/16) so only a few models (instead of 1400+) are shown in the `Comparison` tab.
+- `MMC` and `CORR + MMC` charts for everyone.
 
 
 ## Change Log
@@ -41,4 +42,5 @@ Add `.Rprofile` to your project folder with the following two lines (so you don'
 - **v0.4**: Added Zoom In/Out tips in chart title.
 - **v0.5**: Added `The IA_AI Crew` tab. Renamed `Comparison` to `Compare Your Models`.
 - **v0.6**: Added font awesome icons for GitHub, Twitter, and LinkedIn.
+- **v0.7**: Added `MMC` and `CORR + MMC` charts for my models.
 
