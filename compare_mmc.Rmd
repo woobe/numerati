@@ -94,6 +94,8 @@ for (item in ls_username) {
 # Prepare Shared Data for Crosstalk
 d_new[, key := paste0(Username, "_", Round_Number)]
 d_new[, Round_Correlation := round(Round_Correlation, 5)]
+d_new[, MMC := round(MMC, 5)]
+d_new[, CorrMMC := round(CorrMMC, 5)]
 sd <- SharedData$new(d_new, key = ~key)
 
 
