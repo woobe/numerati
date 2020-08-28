@@ -2,6 +2,9 @@
 # Pipeline
 # ==============================================================================
 
+# Making sure
+setwd("/home/joe/Repo/numerati")
+
 # Preload
 pacman::p_load(data.table, stringr, pushoverr)
 library(Rnumerai)
@@ -26,10 +29,16 @@ if (chk_download) {
   
   # Knit index.Rmd to index.html
   rmarkdown::render("index.Rmd", "html_document")
-  
+  rmarkdown::render("compare_corr.Rmd", "html_document")
+  rmarkdown::render("compare_mmc.Rmd", "html_document")
+  rmarkdown::render("compare_corrmmc.Rmd", "html_document")
+
   # Commit and push index.html to github
   txt_comment <- paste("Auto Refresh", t_now)
   system(paste0("git commit -m '", txt_comment, "' index.html"))
+  system(paste0("git commit -m '", txt_comment, "' compare_corr.html"))
+  system(paste0("git commit -m '", txt_comment, "' compare_mmc.html"))
+  system(paste0("git commit -m '", txt_comment, "' compare_corrmmc.html"))
   system("git push")
   
   # Display

@@ -86,81 +86,50 @@ for (item in ls_username) {
 }
 
 
+# Using a subset for tweaking only (comment out)
+# tmp_username <- c("integration_test", "hb", "oblique", "madmin", "beepboopbeep", "orthogonal")
+# d_new <- copy(d_new[Username %in% tmp_username])
+
+
 # Prepare Shared Data for Crosstalk
 d_new[, key := paste0(Username, "_", Round_Number)]
 d_new[, Round_Correlation := round(Round_Correlation, 5)]
 sd <- SharedData$new(d_new, key = ~key)
 
 
+# loop through different wesanderson settings to create palette for all models
+if (TRUE) {
+  
+  set.seed(1234)
+  n_color = length(unique(d_latest$Username))
+  n_limit = 5
+  n_pal_round <- ceiling(n_color / n_limit)
+  random_palette <- c()
+
+  for (n_pal in 1:n_pal_round) {
+    list_pal_name <- c("Royal2", "Zissou1", "Darjeeling1", "FantasticFox1", "Moonrise3")
+    tmp_pal_name <- list_pal_name[sample(length(list_pal_name), 1)] # pick a random palettes
+    tmp_pal <- wes_palette(name = tmp_pal_name, n = n_limit, type = "continuous") # generate 
+    random_palette <- c(random_palette, tmp_pal)
+  }
+
+  random_palette <- random_palette[1:n_color] # trim
+  
+}
+
+
+
 # ==============================================================================
-# Generate Plot for Specific Models
+# Generate Comparison plot
 # ==============================================================================
 
-# Define model names here
-models_all <- c("ia_ai", "the_razor", "woobe", "the_sweetspot", "the_half_and_half",
-               "the_divergent", "the_unexposed", "the_parachute", "low_cor_pred", "the_unburnt")
-
-# My Models (CORR)
-g_all_cor <-
-  ggplot(d_new[Username %in% models_all]) +
+g_compare_corrmmc <-
+  ggplot(sd) +
   dark_mode(theme_fivethirtyeight()) +
-  scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_manual(values = random_palette) +
   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
   theme(panel.background = element_rect(fill = "#222222")) +
   theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
-  theme(plot.title = element_text(size = 12),
-       axis.text = element_text(size = 6),
-       axis.title = element_text(size = 10),
-       legend.title = element_text(size = 8),
-       legend.text = element_text(size = 6)) +
-  theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("Correlation") + 
-  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
-  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
-  geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
-
-# My Models (MMC)
-g_all_mmc <-
-  ggplot(d_new[Username %in% models_all]) +
-  dark_mode(theme_fivethirtyeight()) +
-  scale_color_brewer(type='qual', palette	='Paired') + 
-  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
-  theme(panel.background = element_rect(fill = "#222222")) +
-  theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_mmc, ymin = min_mmc, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_mmc, ymin = p25_mmc, group = Username), fill = "white", alpha = 0.05) +
-  theme(plot.title = element_text(size = 12),
-       axis.text = element_text(size = 6),
-       axis.title = element_text(size = 10),
-       legend.title = element_text(size = 8),
-       legend.text = element_text(size = 6)) +
-  theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("MMC") + 
-  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
-  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
-  geom_point(aes(x = Round_Number, y = MMC, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = MMC, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = MMC, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
-
-
-# My Models (CORR + MMC)
-g_all_cm <-
-  ggplot(d_new[Username %in% models_all]) +
-  dark_mode(theme_fivethirtyeight()) +
-  scale_color_brewer(type='qual', palette	='Paired') + 
-  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
-  theme(panel.background = element_rect(fill = "#222222")) +
-  theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cm, ymin = min_cm, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cm, ymin = p25_cm, group = Username), fill = "white", alpha = 0.05) +
   theme(plot.title = element_text(size = 12),
        axis.text = element_text(size = 6),
        axis.title = element_text(size = 10),
@@ -171,11 +140,7 @@ g_all_cm <-
   scale_y_continuous(breaks = pretty_breaks(n = 10)) +
   scale_x_continuous(breaks = pretty_breaks(n = 10)) +
   geom_point(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
-
+  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3, alpha = 0.95)
 
 ```
 
@@ -183,78 +148,36 @@ g_all_cm <-
 
 #  {.tabset}
 
-
-
-## My Models (CORR)
+## Compare All Models (CORR + MMC)
 
 <br>
 <center>
 <h4>
-Resolved / Latest Round Correlation
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
+Resolved / Latest Round Correlation + MMC
 <br>
 (Highlight Area to Zoom In / Double-Click to Zoom Out)
 </h4>
-
 ```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_all_cor) %>% config(displayModeBar = FALSE)
+ggplotly(g_compare_corrmmc) %>% config(displayModeBar = FALSE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.width=60}
+filter_select("id_username", "Select Your Models:", sd, ~Username)
 ```
 
 </center>
 
 
-
-## My Models (MMC)
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_all_mmc) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-
-
-## My Models (CORR + MMC)
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-
-
-## Compare All Models
+## Links
 
 <h3>
 
+- Home - <a href="https://woobe.github.io/numerati/" target="_blank">**Link**</a>
 - Correlation Only - <a href="https://woobe.github.io/numerati/compare_corr.html" target="_blank">**Link**</a>
 - MMC Only - <a href="https://woobe.github.io/numerati/compare_mmc.html" target="_blank">**Link**</a>
 - Correlation + MCC - <a href="https://woobe.github.io/numerati/compare_corrmmc.html" target="_blank">**Link**</a>
 
 </h3>
-
 
 ## About
 
@@ -294,4 +217,3 @@ Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woo
 <a href="https://github.com/woobe" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a>   <a href="https://twitter.com/matlabulous" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>   <a href="https://www.linkedin.com/in/jofaichow/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 
 </center>
-
