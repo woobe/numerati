@@ -1,0 +1,162 @@
+---
+pagetitle: "Numerati Dashboard"
+output: 
+  html_document: 
+    highlight: zenburn  
+    theme: spacelab
+    includes:
+       in_header: ga_header.html
+---
+
+<br>
+<center><img src="https://numer.ai/img/Numerai-Logo-Side-Black.8393ed16.png" width="25%"></center>
+<br>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+
+# Preload All Libararies
+library(Rnumerai)
+pacman::p_load(data.table, dplyr, dtplyr, stringr, fst) # for data munging
+pacman::p_load(crosstalk, htmltools) # for interactivitiy 
+pacman::p_load(ggplot2, plotly, scales, ggpubr, ggthemes, ggdark, wesanderson) # for charts
+pacman::p_load(DT) # for table
+
+# Load Data (see download_data.R)
+d_round_corr <- as.data.table(read_fst("./data/round_corr_latest.fst"))
+
+# Latest record per Round
+d_round_corr[, last_date := max(Date), by = Round_Number]
+d_latest <- copy(d_round_corr[Date == last_date])
+
+# CORR + MMC (for New Leaderboard)
+d_latest[, CorrMMC := Round_Correlation + MMC]
+
+# Reformat d_latest for data download
+d_download <- copy(d_latest)
+d_download[, last_date := NULL]
+d_download[, Relevant := NULL]
+d_download[, Date := NULL]
+
+setnames(d_download, 
+         c("Round_Number", "Round_Correlation", "MMC", "Correlation_With_MM", "Username", "CorrMMC"),
+         c("round", "corr", "mmc", "meta", "model", "corrmmc"))
+
+# Corr Rank and Percentile
+d_download[, corr_rank := rank(corr) - 1, by = round]
+d_download[, corr_rank_max := max(corr_rank), by = round]
+d_download[, corr_pct := round(corr_rank / corr_rank_max * 100, 2)]
+d_download[, corr_rank := NULL]
+d_download[, corr_rank_max := NULL]
+
+# MMC Rank and Percentile
+d_download[, mmc_rank := rank(mmc) - 1, by = round]
+d_download[, mmc_rank_max := max(mmc_rank), by = round]
+d_download[, mmc_pct := round(mmc_rank / mmc_rank_max * 100, 2)]
+d_download[, mmc_rank := NULL]
+d_download[, mmc_rank_max := NULL]
+
+# Corr+MMC Rank and Percentile
+d_download[, corrmmc_rank := rank(corrmmc) - 1, by = round]
+d_download[, corrmmc_rank_max := max(corrmmc_rank), by = round]
+d_download[, corrmmc_pct := round(corrmmc_rank / corrmmc_rank_max * 100, 2)]
+d_download[, corrmmc_rank := NULL]
+d_download[, corrmmc_rank_max := NULL]
+
+# MetaCorr Rank and Percentile
+d_download[, meta_rank := rank(meta) - 1, by = round]
+d_download[, meta_rank_max := max(meta_rank), by = round]
+d_download[, meta_pct := round(meta_rank / meta_rank_max * 100, 2)]
+d_download[, meta_rank := NULL]
+d_download[, meta_rank_max := NULL]
+
+# Reorder columns
+setcolorder(d_download, c("model", "round", "corr", "corr_pct", "mmc", "mmc_pct", "corrmmc", "corrmmc_pct", "meta", "meta_pct"))
+
+```
+
+
+
+#  {.tabset}
+
+## Download Latest Data
+
+<br>
+<center>
+
+```{r, echo=FALSE, out.width="100%", warning=FALSE, message=FALSE}
+d_download %>%
+  datatable(extensions = 'Buttons',
+            rownames = FALSE,
+            filter = list(position = 'top', clear = FALSE),
+            options = list(dom = 'Blfrtip',
+                           buttons = c('copy', 'csv', 'excel', 'pdf', 'print'),
+                           lengthMenu = list(c(10,25,50,100),
+                                             c(10,25,50,100)))) %>%
+  formatRound(columns = c("corr", "mmc", "corrmmc","meta"), digits = 4)
+
+```
+
+</center>
+
+<br>
+
+
+## Links
+
+<br>
+
+<center>
+
+<a href="https://medium.com/numerai/a-new-data-science-competition-where-being-different-pays-251c2aecc40a" target="_blank"><img src="./img/what_is_a_metamodel.jpg" width="50%"></a><br>
+
+<h4>
+
+<a href="https://woobe.github.io/numerati/" target="_blank">**HOME**</a> --- <a href="https://woobe.github.io/numerati/compare_corr.html" target="_blank">**CORR Only**</a> --- <a href="https://woobe.github.io/numerati/compare_mmc.html" target="_blank">**MMC Only**</a> --- <a href="https://woobe.github.io/numerati/compare_corrmmc.html" target="_blank">**CORR + MMC**</a>
+
+</h4>
+
+</center>
+
+
+
+## About
+
+<center>
+<br>
+This dashboard is brought to you by **<a href="https://twitter.com/matlabulous" target="_blank">Jo-fai (Joe) Chow</a>**  
+
+**The IA_AI Crew**
+
+<a href="https://numer.ai/ia_ai" target="_blank"><img src="./img/ia_ai_256.png" width="10%"></a><br>
+<a href="https://numer.ai/the_razor" target="_blank"><img src="./img/the_razor_256.png" width="10%"></a>
+<a href="https://numer.ai/the_sweetspot" target="_blank"><img src="./img/the_sweetspot_256.png" width="10%"></a><br>
+<a href="https://numer.ai/the_unburnt" target="_blank"><img src="./img/the_unburnt_256.png" width="10%"></a>
+<a href="https://numer.ai/woobe" target="_blank"><img src="./img/woobe_256.png" width="10%"></a>
+<a href="https://numer.ai/the_divergent" target="_blank"><img src="./img/the_divergent_256.png" width="10%"></a><br>
+<a href="https://numer.ai/the_unexposed" target="_blank"><img src="./img/the_unexposed_256.png" width="10%"></a>
+<a href="https://numer.ai/low_cor_pred" target="_blank"><img src="./img/low_cor_pred_256.png" width="10%"></a>
+<a href="https://numer.ai/the_half_and_half" target="_blank"><img src="./img/the_half_and_half_256.png" width="10%"></a>
+<a href="https://numer.ai/the_parachute" target="_blank"><img src="./img/the_parachute_256.png" width="10%"></a>
+
+*"The NMR Life Chose Me."*
+
+<br>
+
+<h5>
+**Disclaimer**
+</h5>
+
+<h6>
+No NMR was burned in the making of this prototype.<br>
+This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
+Last updated: `r Sys.time()` UTC<br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.10</a><br>
+Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
+</h6>
+
+<a href="https://github.com/woobe" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a>   <a href="https://twitter.com/matlabulous" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>   <a href="https://www.linkedin.com/in/jofaichow/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+
+</center>
