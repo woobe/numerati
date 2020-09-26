@@ -45,3 +45,4 @@ Add `.Rprofile` to your project folder with the following two lines (so you don'
 - **v0.7**: Added `MMC` and `CORR + MMC` charts for my models.
 - **v0.8**: Added `CORR`, `MMC`, and `CORR + MMC` (as new pages) for all models.
 - **v0.9**: Added a [masterpiece](https://twitter.com/matlabulous/status/1296879591546597385) to explain MMC.
+- **v0.10**: Added `Data` tab.

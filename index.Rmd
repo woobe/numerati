@@ -264,6 +264,18 @@ ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
 </center>
 
 
+## Data
+
+<br>
+<center>
+<a href="https://woobe.github.io/numerati/data.html" target="_blank"><img src="./img/more_data.jpg" width="50%"></a>
+<br>
+<h3>
+<a href="https://woobe.github.io/numerati/data.html" target="_blank">**Let's Go!**</a>
+</h3>
+<br>
+<center>
+
 
 ## About
 
@@ -296,7 +308,7 @@ This dashboard is brought to you by **<a href="https://twitter.com/matlabulous" 
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.9</a><br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.10</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 

@@ -180,7 +180,7 @@ filter_select("id_username", "Select Your Models:", sd, ~Username)
 
 <h4>
 
-<a href="https://woobe.github.io/numerati/" target="_blank">**HOME**</a> --- <a href="https://woobe.github.io/numerati/compare_corr.html" target="_blank">**CORR Only**</a> --- <a href="https://woobe.github.io/numerati/compare_mmc.html" target="_blank">**MMC Only**</a> --- <a href="https://woobe.github.io/numerati/compare_corrmmc.html" target="_blank">**CORR + MMC**</a>
+<a href="https://woobe.github.io/numerati/" target="_blank">**HOME**</a> --- <a href="https://woobe.github.io/numerati/compare_corr.html" target="_blank">**CORR Only**</a> --- <a href="https://woobe.github.io/numerati/compare_mmc.html" target="_blank">**MMC Only**</a> --- <a href="https://woobe.github.io/numerati/compare_corrmmc.html" target="_blank">**CORR + MMC**</a> --- <a href="https://woobe.github.io/numerati/data.html" target="_blank">**DATA**</a>
 
 </h4>
 
@@ -219,7 +219,7 @@ This dashboard is brought to you by **<a href="https://twitter.com/matlabulous" 
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.9</a><br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.10</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 
