@@ -271,9 +271,11 @@ ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
 <a href="https://woobe.github.io/numerati/data.html" target="_blank"><img src="./img/more_data.jpg" width="50%"></a>
 <br>
 <h3>
-<a href="https://woobe.github.io/numerati/data.html" target="_blank">**Let's Go!**</a>
+<a href="https://raw.githubusercontent.com/woobe/numerati/master/data.csv" target="_blank">**Download Latest Data (CSV)**</a>
 </h3>
-<br>
+<h3>
+<a href="https://woobe.github.io/numerati/data.html" target="_blank">**Data Dashboard**</a>
+</h3>
 <center>
 
 
@@ -285,18 +287,23 @@ This dashboard is brought to you by **<a href="https://twitter.com/matlabulous" 
 
 **The IA_AI Crew**
 
-<a href="https://numer.ai/ia_ai" target="_blank"><img src="./img/ia_ai_256.png" width="10%"></a><br>
-<a href="https://numer.ai/the_razor" target="_blank"><img src="./img/the_razor_256.png" width="10%"></a>
-<a href="https://numer.ai/the_sweetspot" target="_blank"><img src="./img/the_sweetspot_256.png" width="10%"></a><br>
-<a href="https://numer.ai/the_unburnt" target="_blank"><img src="./img/the_unburnt_256.png" width="10%"></a>
-<a href="https://numer.ai/woobe" target="_blank"><img src="./img/woobe_256.png" width="10%"></a>
-<a href="https://numer.ai/the_divergent" target="_blank"><img src="./img/the_divergent_256.png" width="10%"></a><br>
-<a href="https://numer.ai/the_unexposed" target="_blank"><img src="./img/the_unexposed_256.png" width="10%"></a>
-<a href="https://numer.ai/low_cor_pred" target="_blank"><img src="./img/low_cor_pred_256.png" width="10%"></a>
-<a href="https://numer.ai/the_half_and_half" target="_blank"><img src="./img/the_half_and_half_256.png" width="10%"></a>
-<a href="https://numer.ai/the_parachute" target="_blank"><img src="./img/the_parachute_256.png" width="10%"></a>
+<a href="https://numer.ai/ia_ai" target="_blank"><img src="./img/ia_ai_256.png" width="15%"></a><br>
 
 *"The NMR Life Chose Me."*
+
+<br>
+
+<h5>
+**Like What You See?**
+</h5>
+
+Support my community effort with $NMR
+
+<img src="./img/nmr_wallet.png" width="15%">
+
+<h6>
+`0x0E68111AA447CC56450a2C14BBB26aBf33535F22`
+</h6>
 
 <br>
 
@@ -308,7 +315,7 @@ This dashboard is brought to you by **<a href="https://twitter.com/matlabulous" 
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.10</a><br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.11</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 

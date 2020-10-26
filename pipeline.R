@@ -33,7 +33,7 @@ if (chk_download) {
   rmarkdown::render("compare_mmc.Rmd", "html_document")
   rmarkdown::render("compare_corrmmc.Rmd", "html_document")
   rmarkdown::render("data.Rmd", "html_document")
-
+  
   # Commit and push index.html to github
   txt_comment <- paste("Auto Refresh", t_now)
   system(paste0("git commit -m '", txt_comment, "' index.html"))
@@ -41,6 +41,7 @@ if (chk_download) {
   system(paste0("git commit -m '", txt_comment, "' compare_mmc.html"))
   system(paste0("git commit -m '", txt_comment, "' compare_corrmmc.html"))
   system(paste0("git commit -m '", txt_comment, "' data.html"))
+  system(paste0("git commit -m '", txt_comment, "' data.csv"))
   system("git push")
   
   # Display
