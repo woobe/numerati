@@ -147,12 +147,14 @@ This dashboard is brought to you by **<a href="https://twitter.com/matlabulous" 
 **Like What You See?**
 </h5>
 
-Support my community effort with $NMR
+Support my community effort with $NMR (or other ERC-20 Tokens)
 
-<img src="./img/nmr_wallet.png" width="15%">
+<img src="./img/eth_wallet.png" width="15%">
 
 <h6>
-`0x0E68111AA447CC56450a2C14BBB26aBf33535F22`
+My ETH Wallet Address:
+
+`0x2a943dF83FE7D2e6Db651f937D848460159856e7`
 </h6>
 
 <br>
@@ -172,3 +174,4 @@ Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woo
 <a href="https://github.com/woobe" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a>   <a href="https://twitter.com/matlabulous" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>   <a href="https://www.linkedin.com/in/jofaichow/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 
 </center>
+
