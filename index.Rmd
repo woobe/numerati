@@ -100,13 +100,15 @@ sd <- SharedData$new(d_new, key = ~key)
 
 # Define model names here
 models_all <- c("ia_ai", "the_razor", "woobe", "the_sweetspot", "the_half_and_half",
-               "the_divergent", "the_unexposed", "the_parachute", "low_cor_pred", "the_unburnt")
+               "the_divergent", "the_unexposed", "the_parachute", "low_cor_pred", "the_unburnt",
+               paste0("the_aijoe", 1:5))
 
 # My Models (CORR)
 g_all_cor <-
   ggplot(d_new[Username %in% models_all]) +
   dark_mode(theme_fivethirtyeight()) +
-  scale_color_brewer(type='qual', palette	='Paired') + 
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 20") +
   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
   theme(panel.background = element_rect(fill = "#222222")) +
   theme(legend.background = element_rect(fill = "#222222")) +
@@ -131,7 +133,8 @@ g_all_cor <-
 g_all_mmc <-
   ggplot(d_new[Username %in% models_all]) +
   dark_mode(theme_fivethirtyeight()) +
-  scale_color_brewer(type='qual', palette	='Paired') + 
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 20") +
   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
   theme(panel.background = element_rect(fill = "#222222")) +
   theme(legend.background = element_rect(fill = "#222222")) +
@@ -157,7 +160,8 @@ g_all_mmc <-
 g_all_cm <-
   ggplot(d_new[Username %in% models_all]) +
   dark_mode(theme_fivethirtyeight()) +
-  scale_color_brewer(type='qual', palette	='Paired') + 
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 20") +
   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
   theme(panel.background = element_rect(fill = "#222222")) +
   theme(legend.background = element_rect(fill = "#222222")) +
