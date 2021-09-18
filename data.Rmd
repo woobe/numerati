@@ -86,7 +86,7 @@ fwrite(d_download, file = "./data.csv")
 
 #  {.tabset}
 
-## Download Latest Data
+## Latest Live Performance Data
 
 <br>
 <center>
@@ -119,9 +119,7 @@ d_download %>%
 
 <h4>
 
-<a href="https://woobe.github.io/numerati/" target="_blank">**HOME**</a> --- <a href="https://woobe.github.io/numerati/compare_corr.html" target="_blank">**CORR Only**</a> --- <a href="https://woobe.github.io/numerati/compare_mmc.html" target="_blank">**MMC Only**</a> --- <a href="https://woobe.github.io/numerati/compare_corrmmc.html" target="_blank">**CORR + MMC**</a>
-
-<a href="https://raw.githubusercontent.com/woobe/numerati/master/data.csv" target="_blank">**Download Latest Data (CSV)**</a>
+<a href="https://woobe.github.io/numerati/" target="_blank">**Main Dashboard**</a> --- <a href="https://raw.githubusercontent.com/woobe/numerati/master/data.csv" target="_blank">**Download Latest Data (CSV)**</a>
 
 </h4>
 
@@ -167,7 +165,7 @@ My ETH Wallet Address:
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.11</a><br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.12</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 

@@ -191,7 +191,7 @@ g_all_cm <-
 
 
 
-## My Models (CORR)
+## Legacy Models (CORR)
 
 <br>
 <center>
@@ -211,7 +211,7 @@ ggplotly(g_all_cor) %>% config(displayModeBar = FALSE)
 
 
 
-## My Models (MMC)
+## Legacy Models (MMC)
 
 <br>
 <center>
@@ -231,7 +231,7 @@ ggplotly(g_all_mmc) %>% config(displayModeBar = FALSE)
 
 
 
-## My Models (CORR + MMC)
+## Legacy Models (CORR + MMC)
 
 <br>
 <center>
@@ -251,7 +251,7 @@ ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
 
 
 
-## Compare All Models
+## Compare Your Models
 
 <br>
 
@@ -261,7 +261,7 @@ ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
 
 <h3>
 
-<a href="https://woobe.github.io/numerati/compare_corr.html" target="_blank">**CORR Only**</a> --- <a href="https://woobe.github.io/numerati/compare_mmc.html" target="_blank">**MMC Only**</a> --- <a href="https://woobe.github.io/numerati/compare_corrmmc.html" target="_blank">**CORR + MMC**</a>
+Check out this <a href="https://dashboard.numeraipayouts.com/" target="_blank">**Dashboard**</a> by Bouwe Ceunen!
 
 </h3>
 
@@ -321,7 +321,7 @@ My ETH Wallet Address:
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.11</a><br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.12</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 

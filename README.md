@@ -47,4 +47,6 @@ Add `.Rprofile` to your project folder with the following two lines (so you don'
 - **v0.9**: Added a [masterpiece](https://twitter.com/matlabulous/status/1296879591546597385) to explain MMC.
 - **v0.10**: Added `Data` tab.
 - **v0.11**: Added direct link to download data and NMR wallet address.
+- **v0.12**: Sped up the progress with `foreach` and `doParallel`. Removed comparison HTMLs due to increasing filesize.
+
 

@@ -46,8 +46,8 @@ cat("[Info]: Checking the latest daily score ...\n")
 chk_updated <- 0 
 n_wait <- 0
 n_sleep <- 300 # pause between checks
-n_hardstop <- 110
-if (weekdays(Sys.Date()) == "Saturday") n_hardstop <- 70
+n_hardstop <- 100
+if (weekdays(Sys.Date()) == "Saturday") n_hardstop <- 40
 
 # Main while loop
 while (chk_updated == 0) {
