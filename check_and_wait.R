@@ -47,7 +47,7 @@ chk_updated <- 0
 n_wait <- 0
 n_sleep <- 300 # pause between checks
 n_hardstop <- 100
-if (weekdays(Sys.Date()) == "Saturday") n_hardstop <- 40
+if (weekdays(Sys.Date()) == "Saturday") n_hardstop <- 36 # i.e. wait until 9pm on Sat
 
 # Main while loop
 while (chk_updated == 0) {
