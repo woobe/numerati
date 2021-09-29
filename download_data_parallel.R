@@ -8,7 +8,7 @@ pacman::p_load(data.table, tictoc, fst, stringr, anytime,
                foreach, parallel, doParallel)
 
 # Parameters
-n_thread <- 4
+n_thread <- detectCores()
 
 
 # ==============================================================================
