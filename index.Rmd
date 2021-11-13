@@ -184,9 +184,10 @@ g_all_cm <-
 
 
 # New Models
-models_new_g1 <- c(paste0("i_like_the_coin_", stringr::str_pad(1:5, 2, pad = "0")))
-models_new_g2 <- c(paste0("i_like_the_coin_", stringr::str_pad(6:10, 2, pad = "0")))
-models_new_g3 <- c(paste0("i_like_the_coin_", stringr::str_pad(11:15, 2, pad = "0")))
+models_new_g1 <- c("ia_ai", paste0("i_like_the_coin_", stringr::str_pad(1:15, 2, pad = "0")))
+models_new_g2 <- c("ia_ai", paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g3 <- c("ia_ai", paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
+
 
 # CORR (Group 1)
 g_new_g1_cor <-
