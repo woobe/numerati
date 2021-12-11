@@ -187,7 +187,10 @@ g_all_cm <-
 models_new_g1 <- c("ia_ai", paste0("i_like_the_coin_", stringr::str_pad(1:15, 2, pad = "0")))
 models_new_g2 <- c("ia_ai", paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g3 <- c("ia_ai", paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
-
+models_new_g4 <- c("ia_ai", 
+                   "i_like_the_coin_06",
+                   "the_hodler_01",
+                   paste0("u_pump_i_pump_", stringr::str_pad(3:5, 2, pad = "0")))
 
 # CORR (Group 1)
 g_new_g1_cor <-
@@ -266,6 +269,34 @@ g_new_g3_cor <-
   geom_path(data = d_new[Username == "integration_test"], 
             aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
             linetype = "dotted", size = 0.25, alpha = 0.5)
+
+# CORR (Group 4)
+g_new_g4_cor <-
+  ggplot(d_new[Username %in% models_new_g4]) +
+  dark_mode(theme_fivethirtyeight()) +
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 20") +
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("Correlation") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+  geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
+
+
 
 
 # CORR + MMC (Group 1)
@@ -346,6 +377,32 @@ g_new_g3_cm <-
             aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
             linetype = "dotted", size = 0.25, alpha = 0.5)
 
+# CORR + MMC (Group 4)
+g_new_g4_cm <-
+  ggplot(d_new[Username %in% models_new_g4]) +
+  dark_mode(theme_fivethirtyeight()) +
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 20") +
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cm, ymin = min_cm, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cm, ymin = p25_cm, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("CORR + MMC") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+  geom_point(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
+
 ```
 
 
@@ -354,7 +411,7 @@ g_new_g3_cm <-
 
 
 
-## Legacy (CORR)
+## Legacy (COR)
 
 <br>
 <center>
@@ -373,7 +430,7 @@ ggplotly(g_all_cor) %>% config(displayModeBar = FALSE)
 </center>
 
 
-## Legacy (CORR + MMC)
+## Legacy (C+M)
 
 <br>
 <center>
@@ -392,7 +449,7 @@ ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
 </center>
 
 
-## New G1 (CORR)
+## New G1 (COR)
 
 <br>
 <center>
@@ -411,7 +468,7 @@ ggplotly(g_new_g1_cor) %>% config(displayModeBar = FALSE)
 </center>
 
 
-## New G1 (CORR + MMC)
+## New G1 (C+M)
 
 <br>
 <center>
@@ -431,7 +488,7 @@ ggplotly(g_new_g1_cm) %>% config(displayModeBar = FALSE)
 
 
 
-## New G2 (CORR)
+## New G2 (COR)
 
 <br>
 <center>
@@ -450,7 +507,7 @@ ggplotly(g_new_g2_cor) %>% config(displayModeBar = FALSE)
 </center>
 
 
-## New G2 (CORR + MMC)
+## New G2 (C+M)
 
 <br>
 <center>
@@ -469,7 +526,7 @@ ggplotly(g_new_g2_cm) %>% config(displayModeBar = FALSE)
 </center>
 
 
-## New G3 (CORR)
+## New G3 (COR)
 
 <br>
 <center>
@@ -487,7 +544,7 @@ ggplotly(g_new_g3_cor) %>% config(displayModeBar = FALSE)
 
 </center>
 
-## New G3 (CORR + MMC)
+## New G3 (C+M)
 
 <br>
 <center>
@@ -502,6 +559,49 @@ Resolved / Latest Round CORR + MMC
 ```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
 ggplotly(g_new_g3_cm) %>% config(displayModeBar = FALSE)
 ```
+
+
+
+
+</center>
+
+
+## New G4 (COR)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g4_cor) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+## New G4 (C+M)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g4_cm) %>% config(displayModeBar = FALSE)
+```
+
+
+
 
 </center>
 
