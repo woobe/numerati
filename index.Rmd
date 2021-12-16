@@ -187,10 +187,10 @@ g_all_cm <-
 models_new_g1 <- c("ia_ai", paste0("i_like_the_coin_", stringr::str_pad(1:15, 2, pad = "0")))
 models_new_g2 <- c("ia_ai", paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g3 <- c("ia_ai", paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
-models_new_g4 <- c("ia_ai", 
+models_new_g4 <- c("ia_ai", "the_aijoe4",
                    "i_like_the_coin_06",
                    "the_hodler_01",
-                   paste0("u_pump_i_pump_", stringr::str_pad(3:5, 2, pad = "0")))
+                   paste0("u_pump_i_pump_", stringr::str_pad(3:4, 2, pad = "0")))
 
 # CORR (Group 1)
 g_new_g1_cor <-
