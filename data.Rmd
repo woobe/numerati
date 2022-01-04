@@ -165,7 +165,7 @@ My ETH Wallet Address:
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.12</a><br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.13</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 

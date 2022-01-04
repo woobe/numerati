@@ -48,5 +48,5 @@ Add `.Rprofile` to your project folder with the following two lines (so you don'
 - **v0.10**: Added `Data` tab.
 - **v0.11**: Added direct link to download data and NMR wallet address.
 - **v0.12**: Sped up the progress with `foreach` and `doParallel`. Removed comparison HTMLs due to increasing filesize.
-
+- **v0.13**: Added links to new models.
 

@@ -127,30 +127,30 @@ models_all <- c("ia_ai", "the_razor", "woobe", "the_sweetspot", "the_half_and_ha
                paste0("the_aijoe", 1:5))
 
 # My Models (CORR)
-g_all_cor <-
-  ggplot(d_new[Username %in% models_all]) +
-  dark_mode(theme_fivethirtyeight()) +
-  # scale_color_brewer(type='qual', palette	='Paired') + 
-  scale_color_tableau("Tableau 20") +
-  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
-  theme(panel.background = element_rect(fill = "#222222")) +
-  theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
-  theme(plot.title = element_text(size = 12),
-       axis.text = element_text(size = 6),
-       axis.title = element_text(size = 10),
-       legend.title = element_text(size = 8),
-       legend.text = element_text(size = 6)) +
-  theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("Correlation") + 
-  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
-  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
-  geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
+# g_all_cor <-
+#   ggplot(d_new[Username %in% models_all]) +
+#   dark_mode(theme_fivethirtyeight()) +
+#   # scale_color_brewer(type='qual', palette	='Paired') + 
+#   scale_color_tableau("Tableau 20") +
+#   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+#   theme(panel.background = element_rect(fill = "#222222")) +
+#   theme(legend.background = element_rect(fill = "#222222")) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
+#   theme(plot.title = element_text(size = 12),
+#        axis.text = element_text(size = 6),
+#        axis.title = element_text(size = 10),
+#        legend.title = element_text(size = 8),
+#        legend.text = element_text(size = 6)) +
+#   theme(axis.title.x = element_blank()) +
+#   xlab("Round") + ylab("Correlation") + 
+#   scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+#   scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+#   geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
+#   geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
+#   geom_path(data = d_new[Username == "integration_test"], 
+#             aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
+#             linetype = "dotted", size = 0.25, alpha = 0.5)
 
 # My Models (MMC)
 # g_all_mmc <-
@@ -207,117 +207,115 @@ g_all_cm <-
 
 
 # New Models
-models_new_g1 <- c("ia_ai", paste0("i_like_the_coin_", stringr::str_pad(1:15, 2, pad = "0")))
-models_new_g2 <- c("ia_ai", paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
-models_new_g3 <- c("ia_ai", paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
-models_new_g4 <- c(#"ia_ai", "the_aijoe4",
-                   "i_like_the_coin_06",
-                   "the_hodler_01",
+models_new_g1 <- c(paste0("i_like_the_coin_", stringr::str_pad(1:15, 2, pad = "0")))
+models_new_g2 <- c(paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g3 <- c(paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g4 <- c("i_like_the_coin_06", "the_hodler_01",
                    paste0("u_pump_i_pump_", stringr::str_pad(3:5, 2, pad = "0")))
 
 # CORR (Group 1)
-g_new_g1_cor <-
-  ggplot(d_new[Username %in% models_new_g1]) +
-  dark_mode(theme_fivethirtyeight()) +
-  # scale_color_brewer(type='qual', palette	='Paired') + 
-  scale_color_tableau("Tableau 20") +
-  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
-  theme(panel.background = element_rect(fill = "#222222")) +
-  theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
-  theme(plot.title = element_text(size = 12),
-       axis.text = element_text(size = 6),
-       axis.title = element_text(size = 10),
-       legend.title = element_text(size = 8),
-       legend.text = element_text(size = 6)) +
-  theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("Correlation") + 
-  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
-  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
-  geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
+# g_new_g1_cor <-
+#   ggplot(d_new[Username %in% models_new_g1]) +
+#   dark_mode(theme_fivethirtyeight()) +
+#   # scale_color_brewer(type='qual', palette	='Paired') + 
+#   scale_color_tableau("Tableau 20") +
+#   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+#   theme(panel.background = element_rect(fill = "#222222")) +
+#   theme(legend.background = element_rect(fill = "#222222")) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
+#   theme(plot.title = element_text(size = 12),
+#        axis.text = element_text(size = 6),
+#        axis.title = element_text(size = 10),
+#        legend.title = element_text(size = 8),
+#        legend.text = element_text(size = 6)) +
+#   theme(axis.title.x = element_blank()) +
+#   xlab("Round") + ylab("Correlation") + 
+#   scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+#   scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+#   geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
+#   geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
+#   geom_path(data = d_new[Username == "integration_test"], 
+#             aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
+#             linetype = "dotted", size = 0.25, alpha = 0.5)
 
 # CORR (Group 2)
-g_new_g2_cor <-
-  ggplot(d_new[Username %in% models_new_g2]) +
-  dark_mode(theme_fivethirtyeight()) +
-  # scale_color_brewer(type='qual', palette	='Paired') + 
-  scale_color_tableau("Tableau 20") +
-  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
-  theme(panel.background = element_rect(fill = "#222222")) +
-  theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
-  theme(plot.title = element_text(size = 12),
-       axis.text = element_text(size = 6),
-       axis.title = element_text(size = 10),
-       legend.title = element_text(size = 8),
-       legend.text = element_text(size = 6)) +
-  theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("Correlation") + 
-  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
-  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
-  geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
+# g_new_g2_cor <-
+#   ggplot(d_new[Username %in% models_new_g2]) +
+#   dark_mode(theme_fivethirtyeight()) +
+#   # scale_color_brewer(type='qual', palette	='Paired') + 
+#   scale_color_tableau("Tableau 20") +
+#   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+#   theme(panel.background = element_rect(fill = "#222222")) +
+#   theme(legend.background = element_rect(fill = "#222222")) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
+#   theme(plot.title = element_text(size = 12),
+#        axis.text = element_text(size = 6),
+#        axis.title = element_text(size = 10),
+#        legend.title = element_text(size = 8),
+#        legend.text = element_text(size = 6)) +
+#   theme(axis.title.x = element_blank()) +
+#   xlab("Round") + ylab("Correlation") + 
+#   scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+#   scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+#   geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
+#   geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
+#   geom_path(data = d_new[Username == "integration_test"], 
+#             aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
+#             linetype = "dotted", size = 0.25, alpha = 0.5)
 
 # CORR (Group 3)
-g_new_g3_cor <-
-  ggplot(d_new[Username %in% models_new_g3]) +
-  dark_mode(theme_fivethirtyeight()) +
-  # scale_color_brewer(type='qual', palette	='Paired') + 
-  scale_color_tableau("Tableau 20") +
-  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
-  theme(panel.background = element_rect(fill = "#222222")) +
-  theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
-  theme(plot.title = element_text(size = 12),
-       axis.text = element_text(size = 6),
-       axis.title = element_text(size = 10),
-       legend.title = element_text(size = 8),
-       legend.text = element_text(size = 6)) +
-  theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("Correlation") + 
-  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
-  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
-  geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
+# g_new_g3_cor <-
+#   ggplot(d_new[Username %in% models_new_g3]) +
+#   dark_mode(theme_fivethirtyeight()) +
+#   # scale_color_brewer(type='qual', palette	='Paired') + 
+#   scale_color_tableau("Tableau 20") +
+#   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+#   theme(panel.background = element_rect(fill = "#222222")) +
+#   theme(legend.background = element_rect(fill = "#222222")) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
+#   theme(plot.title = element_text(size = 12),
+#        axis.text = element_text(size = 6),
+#        axis.title = element_text(size = 10),
+#        legend.title = element_text(size = 8),
+#        legend.text = element_text(size = 6)) +
+#   theme(axis.title.x = element_blank()) +
+#   xlab("Round") + ylab("Correlation") + 
+#   scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+#   scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+#   geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
+#   geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
+#   geom_path(data = d_new[Username == "integration_test"], 
+#             aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
+#             linetype = "dotted", size = 0.25, alpha = 0.5)
 
 # CORR (Group 4)
-g_new_g4_cor <-
-  ggplot(d_new[Username %in% models_new_g4]) +
-  dark_mode(theme_fivethirtyeight()) +
-  # scale_color_brewer(type='qual', palette	='Paired') + 
-  scale_color_tableau("Tableau 20") +
-  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
-  theme(panel.background = element_rect(fill = "#222222")) +
-  theme(legend.background = element_rect(fill = "#222222")) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
-  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
-  theme(plot.title = element_text(size = 12),
-       axis.text = element_text(size = 6),
-       axis.title = element_text(size = 10),
-       legend.title = element_text(size = 8),
-       legend.text = element_text(size = 6)) +
-  theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("Correlation") + 
-  scale_y_continuous(breaks = pretty_breaks(n = 10)) +
-  scale_x_continuous(breaks = pretty_breaks(n = 10)) +
-  geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
-  geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
-  geom_path(data = d_new[Username == "integration_test"], 
-            aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
-            linetype = "dotted", size = 0.25, alpha = 0.5)
+# g_new_g4_cor <-
+#   ggplot(d_new[Username %in% models_new_g4]) +
+#   dark_mode(theme_fivethirtyeight()) +
+#   # scale_color_brewer(type='qual', palette	='Paired') + 
+#   scale_color_tableau("Tableau 20") +
+#   theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+#   theme(panel.background = element_rect(fill = "#222222")) +
+#   theme(legend.background = element_rect(fill = "#222222")) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cor, ymin = min_cor, group = Username), fill = "white", alpha = 0.025) +
+#   geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cor, ymin = p25_cor, group = Username), fill = "white", alpha = 0.05) +
+#   theme(plot.title = element_text(size = 12),
+#        axis.text = element_text(size = 6),
+#        axis.title = element_text(size = 10),
+#        legend.title = element_text(size = 8),
+#        legend.text = element_text(size = 6)) +
+#   theme(axis.title.x = element_blank()) +
+#   xlab("Round") + ylab("Correlation") + 
+#   scale_y_continuous(breaks = pretty_breaks(n = 10)) +
+#   scale_x_continuous(breaks = pretty_breaks(n = 10)) +
+#   geom_point(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.5) +
+#   geom_path(aes(x = Round_Number, y = Round_Correlation, group = Username, colour = Username), size = 0.3) +
+#   geom_path(data = d_new[Username == "integration_test"], 
+#             aes(x = Round_Number, y = Round_Correlation, group = Username, colour = "Baseline (integration_test)"), 
+#             linetype = "dotted", size = 0.25, alpha = 0.5)
 
 
 
@@ -462,184 +460,80 @@ g_new_g4_pct_cm <-
 #  {.tabset}
 
 
+## About
 
-## Legacy (COR)
-
-<br>
 <center>
-<h4>
-Resolved / Latest Round Correlation
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_all_cor) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-
-## Legacy (C+M)
 
 <br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
 
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
-```
+This Numerai dashboard is brought to you by **<a href="https://twitter.com/matlabulous" target="_blank">Jo-fai (Joe) Chow</a>**
 
-</center>
+**Main Model - IA_AI**
 
+<a href="https://numer.ai/ia_ai" target="_blank"><img src="./img/ia_ai_256.png" width="15%"></a><br>
 
-## New G1 (COR)
+*"The NMR Life Chose Me."*
 
 <br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
 
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g1_cor) %>% config(displayModeBar = FALSE)
-```
+<h5>
+**New Models**
+</h5>
 
-</center>
-
-
-## New G1 (C+M)
+<a href="https://numer.ai/i_like_the_coin_06" target="_blank"><img src="./img/i_like_the_coin_256.png" width="15%"></a>
+<a href="https://numer.ai/u_pump_i_pump_04" target="_blank"><img src="./img/u_pump_i_pump_256.png" width="15%"></a>
+<a href="https://numer.ai/the_hodler_01" target="_blank"><img src="./img/the_hodler_256.png" width="15%"></a>
+<a href="https://numer.ai/the_layers_01" target="_blank"><img src="./img/the_layers_256.png" width="15%"></a>
+<a href="https://numer.ai/the_bonaqua_01" target="_blank"><img src="./img/the_bonaqua_256.png" width="15%"></a>
+<a href="https://numer.ai/the_blender_01" target="_blank"><img src="./img/the_blender_256.png" width="15%"></a>
 
 <br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
 
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g1_cm) %>% config(displayModeBar = FALSE)
-```
+<h5>
+**Legacy Models**
+</h5>
+
+<a href="https://numer.ai/the_aijoe4" target="_blank"><img src="./img/the_aijoe_256.png" width="15%"></a>
+<a href="https://numer.ai/woobe" target="_blank"><img src="./img/woobe_256.png" width="15%"></a>
+<a href="https://numer.ai/low_cor_pred" target="_blank"><img src="./img/low_cor_pred_256.png" width="15%"></a>
+<a href="https://numer.ai/the_unburnt" target="_blank"><img src="./img/the_unburnt_256.png" width="15%"></a>
+<a href="https://numer.ai/the_divergent" target="_blank"><img src="./img/the_divergent_256.png" width="15%"></a>
+
+<br>
+
+<a href="https://numer.ai/the_sweetspot" target="_blank"><img src="./img/the_sweetspot_256.png" width="15%"></a>
+<a href="https://numer.ai/the_razor" target="_blank"><img src="./img/the_razor_256.png" width="15%"></a>
+<a href="https://numer.ai/the_half_and_half" target="_blank"><img src="./img/the_half_and_half_256.png" width="15%"></a>
+<a href="https://numer.ai/the_unexposed" target="_blank"><img src="./img/the_unexposed_256.png" width="15%"></a>
+<a href="https://numer.ai/the_parachute" target="_blank"><img src="./img/the_parachute_256.png" width="15%"></a>
+
+<br>
+
+*Note*: I use this dashboard to monitor my own models only. 
+
+If you want to look at other models, check out **`Compare Your Models`** and **`Data`**.
+
+<br>
+
+<h5>
+**Disclaimer**
+</h5>
+
+<h6>
+No NMR was burned in the making of this prototype.<br>
+This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
+Last updated: `r Sys.time()` UTC<br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.13</a><br>
+Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
+</h6>
+
+<a href="https://github.com/woobe" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a>   <a href="https://twitter.com/matlabulous" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>   <a href="https://www.linkedin.com/in/jofaichow/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 
 </center>
 
 
 
-## New G2 (COR)
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g2_cor) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-
-## New G2 (C+M)
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g2_cm) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-
-## New G3 (COR)
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g3_cor) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-## New G3 (C+M)
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g3_cm) %>% config(displayModeBar = FALSE)
-```
-
-
-
-
-</center>
-
-
-## New G4 (COR)
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g4_cor) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-
-
-
-## New G4 (C+M)
+## Key New Models (C+M)
 
 <br>
 <center>
@@ -659,7 +553,7 @@ ggplotly(g_new_g4_cm) %>% config(displayModeBar = FALSE)
 
 
 
-## New G4 (C+M PCT)
+## Key New Models (C+M PCT)
 
 <br>
 <center>
@@ -675,6 +569,81 @@ ggplotly(g_new_g4_pct_cm) %>% config(displayModeBar = FALSE)
 
 </center>
 
+## I Like the Coin (C+M)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g1_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+
+
+## U Pump I Pump (C+M)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g2_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+
+## Hodler (C+M)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g3_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+
+## Legacy Models (C+M)
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_all_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
 
 
 
@@ -710,19 +679,13 @@ Check out this <a href="https://dashboard.numeraipayouts.com/" target="_blank">*
 <center>
 
 
-## About
+
+
+
+
+## Support
 
 <center>
-<br>
-This dashboard is brought to you by **<a href="https://twitter.com/matlabulous" target="_blank">Jo-fai (Joe) Chow</a>**  
-
-**The IA_AI Crew**
-
-<a href="https://numer.ai/ia_ai" target="_blank"><img src="./img/ia_ai_256.png" width="15%"></a><br>
-
-*"The NMR Life Chose Me."*
-
-<br>
 
 <h5>
 **Like What You See?**
@@ -748,11 +711,10 @@ My ETH Wallet Address:
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
 Last updated: `r Sys.time()` UTC<br>
-Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.12</a><br>
+Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.13</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
 
 <a href="https://github.com/woobe" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i></a>   <a href="https://twitter.com/matlabulous" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>   <a href="https://www.linkedin.com/in/jofaichow/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 
 </center>
-
