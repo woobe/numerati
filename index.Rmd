@@ -314,7 +314,7 @@ g_new_g4_pct_cm <-
        legend.title = element_text(size = 8),
        legend.text = element_text(size = 6)) +
   theme(axis.title.x = element_blank()) +
-  xlab("Round") + ylab("CORR + MMC") + 
+  xlab("Round") + ylab("CORR + MMC Percentile") + 
   scale_y_continuous(breaks = pretty_breaks(n = 20)) + 
   scale_x_continuous(breaks = pretty_breaks(n = 20)) +
   geom_point(aes(x = Round_Number, y = corrmmc_pct, group = Username, colour = Username), size = 0.5) +
