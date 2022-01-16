@@ -123,7 +123,7 @@ sd <- SharedData$new(d_new, key = ~key)
 
 # Define model names here
 models_legacy_01 <- c("the_razor", "woobe", "the_sweetspot", "the_half_and_half",
-                      "the_divergent", "the_unexposed", "the_parachute", 
+                      "the_divergent", "the_unexposed", "the_parachute",
                       "low_cor_pred", "the_unburnt")
 
 models_legacy_02 <- c(paste0("the_aijoe", 1:5))
@@ -188,8 +188,9 @@ g_legacy_02_cm <-
 models_new_g1 <- c(paste0("i_like_the_coin_", stringr::str_pad(6:10, 2, pad = "0")))
 models_new_g2 <- c(paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g3 <- c(paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
-models_new_g4 <- c("ia_ai", "i_like_the_coin_06", "the_hodler_01",
-                   paste0("u_pump_i_pump_", stringr::str_pad(3:5, 2, pad = "0")))
+models_new_g4 <- c("ia_ai", "i_like_the_coin_06", paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g5 <- c(paste0("the_layers_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g6 <- c(paste0("the_bonaqua_", stringr::str_pad(1:5, 2, pad = "0")))
 
 
 # CORR + MMC (Group 1)
@@ -324,6 +325,58 @@ g_new_g4_pct_cm <-
             linetype = "dotted", size = 0.25, alpha = 0.5)
 
 
+# CORR + MMC (Group 5)
+g_new_g5_cm <-
+  ggplot(d_new[Username %in% models_new_g5]) +
+  dark_mode(theme_fivethirtyeight()) +
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 10") +
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cm, ymin = min_cm, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cm, ymin = p25_cm, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("CORR + MMC") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 20)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 20)) +
+  geom_point(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
+
+
+# CORR + MMC (Group 5)
+g_new_g6_cm <-
+  ggplot(d_new[Username %in% models_new_g6]) +
+  dark_mode(theme_fivethirtyeight()) +
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 10") +
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cm, ymin = min_cm, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cm, ymin = p25_cm, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("CORR + MMC") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 20)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 20)) +
+  geom_point(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
 
 ```
 
@@ -459,8 +512,6 @@ ggplotly(g_new_g1_cm) %>% config(displayModeBar = FALSE)
 
 </center>
 
-
-
 ## U Pump I Pump
 
 <br>
@@ -499,7 +550,7 @@ ggplotly(g_new_g3_cm) %>% config(displayModeBar = FALSE)
 </center>
 
 
-## Legacy
+## The Layers
 
 <br>
 <center>
@@ -512,10 +563,30 @@ Resolved / Latest Round CORR + MMC
 </h4>
 
 ```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_legacy_01_cm) %>% config(displayModeBar = FALSE)
+ggplotly(g_new_g5_cm) %>% config(displayModeBar = FALSE)
 ```
 
 </center>
+
+
+## The BonAqua
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g6_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
 
 
 ## Legacy (Ensembles)
@@ -535,9 +606,6 @@ ggplotly(g_legacy_02_cm) %>% config(displayModeBar = FALSE)
 ```
 
 </center>
-
-
-
 
 
 
