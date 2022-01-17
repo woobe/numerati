@@ -28,8 +28,10 @@ pacman::p_load(DT) # for table
 d_round_corr <- as.data.table(read_fst("./data/round_corr_latest.fst"))
 
 # Latest record per Round
-d_round_corr[, last_date := max(Date), by = Round_Number]
-d_latest <- copy(d_round_corr[Date == last_date])
+# d_round_corr[, last_date := max(Date), by = Round_Number] # not needed anymore
+# d_latest <- copy(d_round_corr[Date == last_date])
+d_latest <- copy(d_round_corr)
+
 
 # CORR + MMC (for New Leaderboard)
 d_latest[, CorrMMC := Round_Correlation + MMC]

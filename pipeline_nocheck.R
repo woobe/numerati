@@ -27,6 +27,8 @@ source("download_data_parallel.R")
 # Using variable `chk_download` from previous step to determine the following steps
 t_now <- Sys.time()
 
+# Force it to render
+chk_download = TRUE
 
 if (chk_download) {
   

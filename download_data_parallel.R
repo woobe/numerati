@@ -5,6 +5,7 @@
 # devtools::install_github("Omni-Analytics-Group/Rnumerai", upgrade = "always", force = TRUE)
 library(Rnumerai)
 pacman::p_load(data.table, tictoc, fst, stringr, anytime, 
+               dplyr, dtplyr,
                foreach, parallel, doParallel)
 
 # Parameters
@@ -40,9 +41,18 @@ download_round_corr <- function(username) {
 
   # Remove rows with NAs
   d <- d[!is.na(Date)]
-
-  # Sort by round and then date
-  setorderv(d, cols = c("Round_Number", "Date"))
+  
+  # Sort by round
+  d <- d[order(rank(Round_Number, Date))]
+  
+  # Keep only the last record per round
+  d[, max_record := .N, by = Round_Number]
+  d[, n_record := 1:max_record, by = Round_Number]
+  d <- d[n_record == max_record,]
+  
+  # Clean up
+  d[, max_record := NULL]
+  d[, n_record := NULL]
 
   # Return
   return(d)
@@ -120,7 +130,7 @@ if (chk_download) {
   d_round_corr <- foreach(n_user = 1:nrow(d_lb),
                           .combine = rbind, 
                           .multicombine = TRUE,
-                          .packages = c("data.table", "Rnumerai"),
+                          .packages = c("data.table", "Rnumerai", "dplyr", "dtplyr"),
                           .errorhandling = "remove") %dopar% wrapper(n_user)
   
   stopCluster(cl)
