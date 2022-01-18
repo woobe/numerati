@@ -74,7 +74,7 @@ models_new_g1 <- c(paste0("the_coin_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g2 <- c(paste0("the_pump_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g3 <- c(paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g4 <- c("ia_ai", "the_coin_01", 
-                   paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
+                   paste0("the_pump_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g5 <- c(paste0("the_layers_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g6 <- c(paste0("the_bonaqua_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g7 <- c(paste0("the_blender_", stringr::str_pad(1:5, 2, pad = "0")))
