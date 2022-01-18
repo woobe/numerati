@@ -31,11 +31,11 @@ write_fst(d_lb, path = "./data/leaderboard_latest.fst")
 download_round_corr <- function(username) {
 
   # Download data
-  tmp_d <- performance_over_time(username = username,
-                                 metric = "Round_Correlation",
-                                 merge = FALSE,
-                                 round_aggregate = FALSE)
-
+  tmp_d <- Rnumerai::performance_over_time(username = username,
+                                           metric = "Round_Correlation",
+                                           merge = FALSE,
+                                           round_aggregate = FALSE)
+  
   # Extract the table
   d <- as.data.table(tmp_d$data)
 
@@ -65,6 +65,9 @@ wrapper <- function(n_user) {
   tryCatch({tmp_d_round_corr <- download_round_corr(username)}, error = function(e) {cat(" ERROR :",conditionMessage(e), " ")})
   return(tmp_d_round_corr)
 }
+
+
+
 
 
 # ==============================================================================

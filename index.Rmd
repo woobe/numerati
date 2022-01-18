@@ -70,10 +70,11 @@ d_smry[, Username := "round_summary"]
 models_legacy_02 <- c(paste0("the_aijoe", 1:5))
 
 # New Models
-models_new_g1 <- c(paste0("i_like_the_coin_", stringr::str_pad(6:15, 2, pad = "0")))
-models_new_g2 <- c(paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g1 <- c(paste0("the_coin_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g2 <- c(paste0("the_pump_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g3 <- c(paste0("the_hodler_", stringr::str_pad(1:5, 2, pad = "0")))
-models_new_g4 <- c("ia_ai", "i_like_the_coin_06", paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g4 <- c("ia_ai", "the_coin_01", 
+                   paste0("u_pump_i_pump_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g5 <- c(paste0("the_layers_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g6 <- c(paste0("the_bonaqua_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g7 <- c(paste0("the_blender_", stringr::str_pad(1:5, 2, pad = "0")))
@@ -423,11 +424,16 @@ This Numerai dashboard is brought to you by **<a href="https://twitter.com/matla
 **New Models**
 </h5>
 
-<a href="https://numer.ai/i_like_the_coin_06" target="_blank"><img src="./img/i_like_the_coin_256.png" width="12.5%"></a>
-<a href="https://numer.ai/u_pump_i_pump_04" target="_blank"><img src="./img/u_pump_i_pump_256.png" width="12.5%"></a>
+<a href="https://numer.ai/the_coin_01" target="_blank"><img src="./img/i_like_the_coin_256.png" width="12.5%"></a>
+<a href="https://numer.ai/the_pump_04" target="_blank"><img src="./img/u_pump_i_pump_256.png" width="12.5%"></a>
 <a href="https://numer.ai/the_hodler_01" target="_blank"><img src="./img/the_hodler_256.png" width="12.5%"></a>
 <a href="https://numer.ai/the_layers_01" target="_blank"><img src="./img/the_layers_256.png" width="12.5%"></a>
+
+<br>
+
 <a href="https://numer.ai/the_bonaqua_01" target="_blank"><img src="./img/the_bonaqua_256.png" width="12.5%"></a>
+<a href="https://numer.ai/the_wood_01" target="_blank"><img src="./img/the_wood_256.png" width="12.5%"></a>
+<a href="https://numer.ai/the_farmer_01" target="_blank"><img src="./img/the_farmer_256.png" width="12.5%"></a>
 <a href="https://numer.ai/the_blender_01" target="_blank"><img src="./img/the_blender_256.png" width="12.5%"></a>
 
 <br>
@@ -713,7 +719,7 @@ My ETH Wallet Address:
 <h6>
 No NMR was burned in the making of this prototype.<br>
 This is not an official <a href="https://numer.ai/" target="_blank">Numerai</a> product.<br><br>
-Last updated: `r Sys.time()` UTC<br>
+Last updated: `r Sys.time()` CET<br>
 Prototype version: <a href="https://github.com/woobe/numerati#change-log" target="_blank">0.13</a><br>
 Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woobe/numerati</a>
 </h6>
