@@ -46,13 +46,11 @@ download_round_corr <- function(username) {
   d <- d[order(rank(Round_Number, Date))]
   
   # Keep only the last record per round
-  d[, max_record := .N, by = Round_Number]
-  d[, n_record := 1:max_record, by = Round_Number]
-  d <- d[n_record == max_record,]
+  d[, max_date := max(Date), by = Round_Number]
+  d <- d[Date == max_date,]
   
   # Clean up
-  d[, max_record := NULL]
-  d[, n_record := NULL]
+  d[, max_date := NULL]
 
   # Return
   return(d)
