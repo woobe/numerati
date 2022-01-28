@@ -61,6 +61,19 @@ d_smry <- d_latest %>% lazy_dt() %>% group_by(Round_Number) %>%
 d_smry[, Username := "round_summary"]
 
 
+# Remove legacy data from new models
+d_latest <- d_latest[ !(Username == "the_blender_01" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_blender_02" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_blender_03" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_blender_04" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_blender_05" & Round_Number <299)]
+
+d_latest <- d_latest[ !(Username == "the_wood_01" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_wood_02" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_wood_03" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_wood_04" & Round_Number <299)]
+d_latest <- d_latest[ !(Username == "the_wood_05" & Round_Number <299)]
+
 
 # Define model names here
 # models_legacy_01 <- c("the_razor", "woobe", "the_sweetspot", "the_half_and_half",
@@ -78,21 +91,12 @@ models_new_g4 <- c("ia_ai", "the_coin_01",
 models_new_g5 <- c(paste0("the_layers_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g6 <- c(paste0("the_bonaqua_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g7 <- c(paste0("the_blender_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g8 <- c(paste0("the_wood_", stringr::str_pad(1:5, 2, pad = "0")))
 
-
-# Combine list
-ls_username <- c(models_legacy_02,
-                 models_new_g1,
-                 models_new_g2,
-                 models_new_g3,
-                 models_new_g4,
-                 models_new_g5,
-                 models_new_g6,
-                 models_new_g7)
 
 # Add NAs to missing rounds
 ls_username <- unique(d_latest$Username) # no shortcut :(
-# ls_username <- as.character(unique(ls_username)) 
+
 
 d_new <- c() # main data table for graphs
 for (item in ls_username) {
@@ -397,6 +401,33 @@ g_new_g7_cm <-
             aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
             linetype = "dotted", size = 0.25, alpha = 0.5)
 
+
+# CORR + MMC (Group 8)
+g_new_g8_cm <-
+  ggplot(d_new[Username %in% models_new_g8]) +
+  dark_mode(theme_fivethirtyeight()) +
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 10") +
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cm, ymin = min_cm, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cm, ymin = p25_cm, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("CORR + MMC") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 20)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 20)) +
+  geom_point(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
+
 ```
 
 
@@ -425,7 +456,7 @@ This Numerai dashboard is brought to you by **<a href="https://twitter.com/matla
 </h5>
 
 <a href="https://numer.ai/the_coin_01" target="_blank"><img src="./img/i_like_the_coin_256.png" width="12.5%"></a>
-<a href="https://numer.ai/the_pump_04" target="_blank"><img src="./img/u_pump_i_pump_256.png" width="12.5%"></a>
+<a href="https://numer.ai/the_pump_01" target="_blank"><img src="./img/u_pump_i_pump_256.png" width="12.5%"></a>
 <a href="https://numer.ai/the_hodler_01" target="_blank"><img src="./img/the_hodler_256.png" width="12.5%"></a>
 <a href="https://numer.ai/the_layers_01" target="_blank"><img src="./img/the_layers_256.png" width="12.5%"></a>
 
@@ -627,6 +658,25 @@ Resolved / Latest Round CORR + MMC
 
 ```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
 ggplotly(g_new_g7_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+
+## The Wood
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g8_cm) %>% config(displayModeBar = FALSE)
 ```
 
 </center>
