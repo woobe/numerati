@@ -452,6 +452,15 @@ This Numerai dashboard is brought to you by **<a href="https://twitter.com/matla
 <br>
 
 <h5>
+**My NFTees**
+</h5>
+
+<a href="https://opensea.io/assets/0x78c7549716a6290bd92005eb2a4da9701599428a/1575/" target="_blank"><img src="https://lh3.googleusercontent.com/M0DvMVOF4qNPwcoG4tNmBz_R80_YMzz4bpqhgP38U9aRX-9l0zFB8VRcSdH9sBKitx4DifpCV3ckvzjFwm4795NLmqTvaARTYdNgPQ=w256" width="15%"></a>
+<a href="https://opensea.io/assets/0x78c7549716a6290bd92005eb2a4da9701599428a/817/" target="_blank"><img src="https://lh3.googleusercontent.com/vrb46uoaJHtXPaWfMBndbMmStHL9X8S3xux6ja0G-MKJeCa9Ch8AI-YAltwN38XMW_9uUqUzN-rMzmwpnZE_A171lmuua3icVlnxp1M=w256" width="15%"></a>
+
+<br>
+
+<h5>
 **New Models**
 </h5>
 
