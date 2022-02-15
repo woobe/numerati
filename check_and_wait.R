@@ -47,7 +47,7 @@ chk_updated <- 0
 n_wait <- 0
 n_sleep <- 300 # pause between checks
 n_hardstop <- 144 # wait for 12 hours max
-if (weekdays(Sys.Date()) == "Saturday") n_hardstop <- 48 # i.e. wait for 4 hours only on Sat
+if (weekdays(Sys.Date()) == "Saturday") n_hardstop <- 12 # i.e. wait for 1 hours only on Sat
 
 # Main while loop
 source("./set_key.R")
