@@ -74,7 +74,6 @@ d_latest <- d_latest[ !(Username == "the_layers_03" & Round_Number <299)]
 d_latest <- d_latest[ !(Username == "the_layers_04" & Round_Number <299)]
 d_latest <- d_latest[ !(Username == "the_layers_05" & Round_Number <299)]
 
-
 d_latest <- d_latest[ !(Username == "the_wood_01" & Round_Number <299)]
 d_latest <- d_latest[ !(Username == "the_wood_02" & Round_Number <299)]
 d_latest <- d_latest[ !(Username == "the_wood_03" & Round_Number <299)]
@@ -117,10 +116,12 @@ models_new_g5 <- c(paste0("the_layers_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g6 <- c(paste0("the_bonaqua_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g7 <- c(paste0("the_blender_", stringr::str_pad(1:5, 2, pad = "0")))
 models_new_g8 <- c(paste0("the_wood_", stringr::str_pad(1:5, 2, pad = "0")))
+models_new_g9 <- c(paste0("the_farmer_", stringr::str_pad(1:5, 2, pad = "0")))
 
-models_key_g1 <- c("the_coin_01", "the_pump_01", 
-                   "the_hodler_01", "the_layers_01", "the_bonaqua_01", 
-                   "the_wood_01", "the_farmer_01", "the_blender_01")
+
+models_key_g1 <- c("the_pump_03", "the_pump_04",
+                   "the_hodler_04", "the_layers_04", "the_bonaqua_04", 
+                   "the_wood_04", "the_farmer_04", "the_blender_04")
 
 
 # Add NAs to missing rounds
@@ -457,6 +458,33 @@ g_new_g8_cm <-
             aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
             linetype = "dotted", size = 0.25, alpha = 0.5)
 
+
+# CORR + MMC (Group 9)
+g_new_g9_cm <-
+  ggplot(d_new[Username %in% models_new_g9]) +
+  dark_mode(theme_fivethirtyeight()) +
+  # scale_color_brewer(type='qual', palette	='Paired') + 
+  scale_color_tableau("Tableau 10") +
+  theme(plot.background = element_rect(fill = "#222222")) + # or #222 in darkly
+  theme(panel.background = element_rect(fill = "#222222")) +
+  theme(legend.background = element_rect(fill = "#222222")) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = max_cm, ymin = min_cm, group = Username), fill = "white", alpha = 0.025) +
+  geom_ribbon(data = d_smry, aes(x = Round_Number, ymax = p75_cm, ymin = p25_cm, group = Username), fill = "white", alpha = 0.05) +
+  theme(plot.title = element_text(size = 12),
+       axis.text = element_text(size = 6),
+       axis.title = element_text(size = 10),
+       legend.title = element_text(size = 8),
+       legend.text = element_text(size = 6)) +
+  theme(axis.title.x = element_blank()) +
+  xlab("Round") + ylab("CORR + MMC") + 
+  scale_y_continuous(breaks = pretty_breaks(n = 20)) +
+  scale_x_continuous(breaks = pretty_breaks(n = 20)) +
+  geom_point(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.5) +
+  geom_path(aes(x = Round_Number, y = CorrMMC, group = Username, colour = Username), size = 0.3) +
+  geom_path(data = d_new[Username == "integration_test"], 
+            aes(x = Round_Number, y = CorrMMC, group = Username, colour = "Baseline (integration_test)"), 
+            linetype = "dotted", size = 0.25, alpha = 0.5)
+
 ```
 
 
@@ -551,7 +579,7 @@ Code: <a href="https://github.com/woobe/numerati" target="_blank">github.com/woo
 
 
 
-## New Models G1
+## New Models
 
 <br>
 <center>
@@ -571,7 +599,7 @@ ggplotly(g_new_key1_cm) %>% config(displayModeBar = FALSE)
 
 
 
-## New Models G1 (PCT)
+## New Models (PCT)
 
 <br>
 <center>
@@ -587,7 +615,7 @@ ggplotly(g_new_key1_pct_cm) %>% config(displayModeBar = FALSE)
 
 </center>
 
-## I Like the Coin
+## The Coin
 
 <br>
 <center>
@@ -605,7 +633,7 @@ ggplotly(g_new_g1_cm) %>% config(displayModeBar = FALSE)
 
 </center>
 
-## U Pump I Pump
+## The Pump
 
 <br>
 <center>
@@ -681,26 +709,6 @@ ggplotly(g_new_g6_cm) %>% config(displayModeBar = FALSE)
 </center>
 
 
-
-## The Blender
-
-<br>
-<center>
-<h4>
-Resolved / Latest Round CORR + MMC
-<br>
-(Shaded Area = Min / 25th P / 75th P / Max)
-<br>
-(Highlight Area to Zoom In / Double-Click to Zoom Out)
-</h4>
-
-```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
-ggplotly(g_new_g7_cm) %>% config(displayModeBar = FALSE)
-```
-
-</center>
-
-
 ## The Wood
 
 <br>
@@ -720,7 +728,41 @@ ggplotly(g_new_g8_cm) %>% config(displayModeBar = FALSE)
 </center>
 
 
+## The Farmer
 
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g9_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
+
+## The Blender
+
+<br>
+<center>
+<h4>
+Resolved / Latest Round CORR + MMC
+<br>
+(Shaded Area = Min / 25th P / 75th P / Max)
+<br>
+(Highlight Area to Zoom In / Double-Click to Zoom Out)
+</h4>
+
+```{r, echo=FALSE, out.width="95%", warning=FALSE, message=FALSE}
+ggplotly(g_new_g7_cm) %>% config(displayModeBar = FALSE)
+```
+
+</center>
 
 ## Legacy (Ensembles)
 
