@@ -46,8 +46,23 @@ d_load[,(col_round) := round(.SD, 8), .SDcols = col_round]
 # Write again
 fwrite(d_load, file = "data_with_tc.csv")
 
-
 # Compress
 system("pigz --best --force --verbose data_with_tc.csv")
+
+# Write parquet
+library(arrow)
+arrow::write_parquet(d_load, "data_with_tc.parquet",
+                     compression = "gzip",
+                     compression_level = 9)
+
+# Git push
+t_now <- Sys.time()
+txt_comment <- paste("Auto Refresh", t_now, "CEST")
+system(paste0("git commit -m '", txt_comment, "' data_with_tc.csv.gz"))
+system(paste0("git commit -m '", txt_comment, "' data_with_tc.parquet"))
+system("git push")
+
+
+
 
 
