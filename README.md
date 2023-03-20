@@ -1,4 +1,14 @@
-# numerati
+# **Important Notice** 
+
+This project is now deprecated. 
+
+Check out my Shiny Numerati dashboard
+
+- **App/Code** - https://huggingface.co/spaces/jofaichow/shiny-numerati
+- **GitHub** - https://github.com/woobe/shiny-numerati
+
+
+# Numerati
 
 (Yet Another) Dashboard for Numerai Tournament
 
